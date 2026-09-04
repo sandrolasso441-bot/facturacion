@@ -50,6 +50,13 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+    <a href="<?= base_url('marcas') ?>" class="nav-link <?= (url_is('marcas*')) ? 'active' : '' ?>">
+        <i class="nav-icon bi bi-tags"></i>
+        <p>Marcas</p>
+    </a>
+</li>
+
             </ul>
         </nav>
     </div>
