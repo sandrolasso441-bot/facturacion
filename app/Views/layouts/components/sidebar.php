@@ -51,11 +51,18 @@
                 </li>
 
                 <li class="nav-item">
-    <a href="<?= base_url('marcas') ?>" class="nav-link <?= (url_is('marcas*')) ? 'active' : '' ?>">
-        <i class="nav-icon bi bi-tags"></i>
-        <p>Marcas</p>
-    </a>
-</li>
+                    <a href="<?= base_url('marcas') ?>" class="nav-link <?= (url_is('marcas*')) ? 'active' : '' ?>">
+                        <i class="nav-icon bi bi-tags"></i>
+                            <p>Marcas</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="<?= base_url('clientes') ?>" class="nav-link <?= (url_is('clientes*')) ? 'active' : '' ?>">
+                        <i class="nav-icon bi bi-people-fill"></i>
+                            <p>Clientes</p>
+                    </a>
+                </li>
 
             </ul>
         </nav>

@@ -17,6 +17,7 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
     // Vista principal de categorías (HTML)
     $routes->get('categorias', 'CategoriasController::index');
     $routes->get('marcas', 'MarcasController::index'); // Agregado para marcas
+    $routes->get('clientes', 'ClientesController::index');
 });
 
 // 3. Rutas de la API / Endpoints (Requieren Login Y Petición AJAX)
@@ -32,4 +33,12 @@ $routes->group('marcas', ['filter' => ['auth', 'ajax']], function($routes) {
     $routes->post('guardar', 'MarcasController::guardar');
     $routes->get('obtener/(:num)', 'MarcasController::obtener/$1');
     $routes->delete('eliminar/(:num)', 'MarcasController::eliminar/$1');
+});
+
+// 3. Rutas de la API / Endpoints (Requieren Login Y Petición AJAX)
+$routes->group('clientes', ['filter' => ['auth', 'ajax']], function($routes) {
+    $routes->get('getClientes', 'ClientesController::getClientes');
+    $routes->post('guardar', 'ClientesController::guardar');
+    $routes->get('obtener/(:num)', 'ClientesController::obtener/$1');
+    $routes->delete('eliminar/(:num)', 'ClientesController::eliminar/$1');
 });
