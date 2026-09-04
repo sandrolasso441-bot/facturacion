@@ -63,6 +63,12 @@
                             <p>Clientes</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('proveedores') ?>" class="nav-link <?= (url_is('proveedores*')) ? 'active' : '' ?>">
+                        <i class="nav-icon bi bi-truck"></i>
+                            <p>Proveedores</p>
+                    </a>
+                </li>
 
             </ul>
         </nav>

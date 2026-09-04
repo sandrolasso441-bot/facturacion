@@ -18,6 +18,7 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
     $routes->get('categorias', 'CategoriasController::index');
     $routes->get('marcas', 'MarcasController::index'); // Agregado para marcas
     $routes->get('clientes', 'ClientesController::index');
+    $routes->get('proveedores', 'ProveedoresController::index');
 });
 
 // 3. Rutas de la API / Endpoints (Requieren Login Y Petición AJAX)
@@ -42,3 +43,12 @@ $routes->group('clientes', ['filter' => ['auth', 'ajax']], function($routes) {
     $routes->get('obtener/(:num)', 'ClientesController::obtener/$1');
     $routes->delete('eliminar/(:num)', 'ClientesController::eliminar/$1');
 });
+
+// 3. Rutas de la API / Endpoints (Requieren Login Y Petición AJAX)
+$routes->group('proveedores', ['filter' => ['auth', 'ajax']], function($routes) {
+    $routes->get('getProveedores', 'ProveedoresController::getProveedores');
+    $routes->post('guardar', 'ProveedoresController::guardar');
+    $routes->get('obtener/(:num)', 'ProveedoresController::obtener/$1');
+    $routes->delete('eliminar/(:num)', 'ProveedoresController::eliminar/$1');
+});
+
