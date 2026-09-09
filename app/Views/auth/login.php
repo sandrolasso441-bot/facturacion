@@ -11,15 +11,28 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= base_url('assets/adminlte/dist/css/adminlte.min.css') ?>">
 
-    <!-- Estilos para el Fondo Difuminado y Estático -->
+    <!-- Estilos Temáticos: Negro + Naranja con Fondo Elegante -->
     <style>
-        body.login-page {
-            position: relative;
-            background: none !important; /* Anulamos el color de fondo por defecto */
-            overflow-x: hidden;
+        :root {
+            --brand-orange: #ff6b00;
+            --brand-orange-hover: #e05d00;
+            --orange-glow: rgba(255, 107, 0, 0.35);
+            --dark-bg: #0d0e12;
+            --dark-card: rgba(18, 20, 26, 0.82);
+            --input-bg: rgba(255, 255, 255, 0.05);
+            --input-border: rgba(255, 255, 255, 0.12);
         }
 
-        /* Capa de imagen de fondo difuminada */
+        body.login-page {
+            position: relative;
+            background-color: var(--dark-bg) !important;
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: 'Source Sans 3', sans-serif;
+            color: #e4e6eb;
+        }
+
+        /* Capa de imagen de fondo difuminada con sobrecapa oscura */
         body.login-page::before {
             content: "";
             position: fixed;
@@ -27,50 +40,141 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            /* Reemplaza esta URL por la ruta de tu imagen */
-            background-image: url('<?= base_url("assets/img/background.png") ?>'); 
+            background-image: linear-gradient(135deg, rgba(13, 14, 18, 0.88), rgba(20, 10, 5, 0.85)), url('<?= base_url("assets/img/background.png") ?>'); 
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            
-            /* Difuminado y opacidad para mejorar contraste UX */
-            filter: blur(8px);
-            transform: scale(1.05); /* Evita bordes blancos cortados por el desenfoque */
-            opacity: 0.6; 
-            
-            z-index: -1; /* Mantiene la imagen detrás del contenido */
+            filter: blur(6px);
+            transform: scale(1.05);
+            z-index: -2;
         }
 
-        /* Elevación visual de la tarjeta sobre el fondo */
+        /* Resplandor ambiental flotante */
+        .ambient-glow {
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, var(--orange-glow) 0%, rgba(0,0,0,0) 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            pointer-events: none;
+            filter: blur(50px);
+        }
+
         .login-box {
             position: relative;
             z-index: 1;
         }
-        
+
+        /* Tarjeta Oscura con efecto Cristal (Glassmorphism) */
         .card {
-            backdrop-filter: blur(10px); /* Efecto cristal (Glassmorphism) moderno */
-            background-color: rgba(255, 255, 255, 0.9) !important;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            background-color: var(--dark-card) !important;
+            border: 1px solid rgba(255, 107, 0, 0.2) !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7),
+                        0 0 25px rgba(255, 107, 0, 0.12) !important;
+        }
+
+        /* Estilos de Texto e Ícono del Título */
+        .brand-text {
+            color: #ffffff !important;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-icon {
+            color: var(--brand-orange) !important;
+            filter: drop-shadow(0 0 8px var(--orange-glow));
+        }
+
+        /* Controles e Inputs */
+        .form-label {
+            color: #b0b3b8 !important;
+            font-weight: 500;
+        }
+
+        .input-group-text {
+            background-color: var(--input-bg) !important;
+            border-color: var(--input-border) !important;
+            color: var(--brand-orange) !important;
+        }
+
+        .form-control {
+            background-color: var(--input-bg) !important;
+            border-color: var(--input-border) !important;
+            color: #ffffff !important;
+        }
+
+        .form-control::placeholder {
+            color: #72767d !important;
+        }
+
+        .form-control:focus {
+            background-color: rgba(255, 255, 255, 0.08) !important;
+            border-color: var(--brand-orange) !important;
+            box-shadow: 0 0 12px var(--orange-glow) !important;
+            color: #ffffff !important;
+        }
+
+        .form-control:focus + .input-group-text,
+        .input-group:focus-within .input-group-text {
+            border-color: var(--brand-orange) !important;
+            color: #ffffff !important;
+            background-color: var(--brand-orange) !important;
+        }
+
+        /* Botón de Ingreso Naranja */
+        .btn-orange {
+            background: linear-gradient(135deg, var(--brand-orange), #ff3300) !important;
+            border: none !important;
+            color: #ffffff !important;
+            box-shadow: 0 6px 18px var(--orange-glow);
+            transition: all 0.3s ease;
+        }
+
+        .btn-orange:hover {
+            background: linear-gradient(135deg, #ff7a1a, #ff451a) !important;
+            box-shadow: 0 8px 24px rgba(255, 107, 0, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .btn-orange:active {
+            transform: translateY(0);
+        }
+
+        /* Alerta personalizada */
+        .alert-danger {
+            background-color: rgba(220, 53, 69, 0.2) !important;
+            border-color: rgba(220, 53, 69, 0.4) !important;
+            color: #ff8585 !important;
         }
     </style>
 </head>
 <body class="login-page d-flex align-items-center justify-content-center min-vh-100">
     
-    <div class="login-box w-100" style="max-width: 400px;">
+    <!-- Resplandor de fondo -->
+    <div class="ambient-glow"></div>
+
+    <div class="login-box w-100 p-3" style="max-width: 400px;">
         <div class="login-logo text-center mb-4">
-            <a href="#" class="h2 text-decoration-none fw-bold text-dark">
-                <i class="bi bi-receipt text-primary me-2"></i>Facturación App
+            <a href="#" class="h2 text-decoration-none fw-bold brand-text">
+                <i class="bi bi-receipt brand-icon me-2"></i>Facturación App
             </a>
         </div>
         
-        <div class="card shadow-lg border-0 rounded-3">
+        <div class="card border-0 rounded-4">
             <div class="card-body login-card-body p-4">
-                <p class="login-box-msg text-center text-muted mb-4">Ingresa tus credenciales para iniciar sesión</p>
+                <p class="login-box-msg text-center text-secondary-emphasis mb-4" style="color: #a0a5b1 !important;">
+                    Ingresa tus credenciales para iniciar sesión
+                </p>
 
                 <?php if (session()->getFlashdata('error')): ?>
                     <div class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
                         <i class="bi bi-exclamation-triangle-fill me-2"></i>
                         <?= esc(session()->getFlashdata('error')) ?>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 <?php endif; ?>
 
@@ -78,23 +182,23 @@
                     <?= csrf_field() ?>
                     
                     <div class="mb-3">
-                        <label for="username" class="form-label text-secondary small">Usuario</label>
+                        <label for="username" class="form-label small">Usuario</label>
                         <div class="input-group">
-                            <span class="input-group-text bg-light text-secondary"><i class="bi bi-person"></i></span>
+                            <span class="input-group-text"><i class="bi bi-person"></i></span>
                             <input type="text" name="username" id="username" class="form-control" placeholder="admin" required autofocus>
                         </div>
                     </div>
                     
                     <div class="mb-4">
-                        <label for="password" class="form-label text-secondary small">Contraseña</label>
+                        <label for="password" class="form-label small">Contraseña</label>
                         <div class="input-group">
-                            <span class="input-group-text bg-light text-secondary"><i class="bi bi-lock"></i></span>
+                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
                             <input type="password" name="password" id="password" class="form-control" placeholder="••••••••" required>
                         </div>
                     </div>
 
                     <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary fw-semibold py-2">
+                        <button type="submit" class="btn btn-orange fw-semibold py-2 rounded-3">
                             <i class="bi bi-box-arrow-in-right me-2"></i>Ingresar
                         </button>
                     </div>
@@ -102,7 +206,9 @@
             </div>
         </div>
         
-        <p class="text-center text-dark fw-medium small mt-4">&copy; <?= date('Y') ?> Sistema de Facturación</p>
+        <p class="text-center text-secondary small mt-4" style="color: #8a8f9d !important;">
+            &copy; <?= date('Y') ?> Sistema de Facturación
+        </p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
